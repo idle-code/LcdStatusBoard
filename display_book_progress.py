@@ -17,7 +17,7 @@ def lcd_write(text):
     lcd.write_string(text)
 
 start_date = date(2019, 10, 8)
-start_page = 280
+start_page = 260
 pages_per_day = 2
 
 today_date = datetime.now().date()
