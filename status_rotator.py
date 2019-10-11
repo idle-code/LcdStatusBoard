@@ -40,7 +40,8 @@ if __name__ == '__main__':
         message_files = list(filter(os.path.isfile, message_files))
         if len(message_files) == 0:
             print("There is no files in message directory")
-            exit(1)
+            sleep(delay_seconds)
+            continue 
 
         print("There are {} files in watched directory".format(len(message_files)))
         for f in message_files:
