@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import os
+import subprocess
 from time import sleep
 from RPLCD.gpio import CharLCD
 from RPi import GPIO
@@ -45,10 +46,20 @@ if __name__ == '__main__':
 
         print("There are {} files in watched directory".format(len(message_files)))
         for f in message_files:
-            print("Displaying " + f)
-            with open(f, 'r') as message_file:
-                message = message_file.read()
-                message = message.replace('\n', '\n\r')
-                lcd_write(message)
+            message = ''
+            try:
+                if os.access(f, os.X_OK):
+                    print("Executing " + f)
+                    process_info = subprocess.run(f, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+                    message = process_info.stdout
+                else:    
+                    print("Displaying " + f)
+                    with open(f, 'r') as message_file:
+                        message = message_file.read()
+            except FileNotFoundError:
+                print("{} file not found - skipping".format(f))
+
+            message = message.replace('\n', '\n\r')
+            lcd_write(message)
             sleep(delay_seconds)
 
