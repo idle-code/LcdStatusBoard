@@ -7,11 +7,12 @@ from RPLCD.gpio import CharLCD
 from RPi import GPIO
 
 def lcd_write(text):
+    text = text.replace('\n', '\n\r')
     lcd = CharLCD(
             pin_rs=15, pin_rw=16, pin_e=18,
             pins_data=[21, 22, 23, 24],
             numbering_mode=GPIO.BOARD,
-            cols=20, rows=4, dotsize=8,
+            cols=16, rows=4, dotsize=8,
             charmap='A02',
             auto_linebreaks=True
           )
@@ -59,7 +60,6 @@ if __name__ == '__main__':
             except FileNotFoundError:
                 print("{} file not found - skipping".format(f))
 
-            message = message.replace('\n', '\n\r')
             lcd_write(message)
             sleep(delay_seconds)
 
