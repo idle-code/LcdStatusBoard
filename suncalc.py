@@ -1,3 +1,5 @@
+""" Code borrowed from https://github.com/Broham/suncalcPy """
+
 import math
 from datetime import datetime, timedelta
 import time
