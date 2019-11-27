@@ -6,28 +6,51 @@ from time import sleep
 from RPLCD.gpio import CharLCD
 from RPi import GPIO
 
-def lcd_write(text):
-    text = text.replace('\n', '\n\r')
+LCD_COLS = 16
+
+def lcd_write(text, delay=3, scroll_delay=0.2):
     lcd = CharLCD(
             pin_rs=15, pin_rw=16, pin_e=18,
             pins_data=[21, 22, 23, 24],
             numbering_mode=GPIO.BOARD,
-            cols=16, rows=4, dotsize=8,
+            cols=LCD_COLS+1, rows=2, dotsize=8,
             charmap='A02',
-            auto_linebreaks=True
+            auto_linebreaks=False
           )
 
+    text_lines = list(filter(None, text.split('\n')))[-2:]
+    if len(text_lines) != 2:
+        text_lines.append("")
+    assert len(text_lines) == 2
+
+    longest_line_len = max(map(len, text_lines))
+
+    animation_length = 1 + max(0, longest_line_len - LCD_COLS)
     lcd.clear()
-    lcd.write_string(text)
+    for frame, offset in enumerate(range(animation_length)):
+        for line in text_lines:
+            line = line[offset:offset+LCD_COLS].ljust(LCD_COLS)
+            assert len(line) == LCD_COLS
+            lcd.cursor_pos = (lcd.cursor_pos[0], 0)
+            lcd.write_string(line)
+            lcd.crlf()
+
+        if frame == 0 or (animation_length > 1 and frame == animation_length-1):
+            # Wait longer on first and last frame
+            sleep(delay)
+        else:
+            sleep(scroll_delay)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="LCD text rotation utility")
     parser.add_argument('-d', '--delay', type=float, default=3.0, help="Delay between different messages in seconds")
+    parser.add_argument('-s', '--scroll-delay', type=float, default=0.5, help="Animation delay of scrolling message in seconds seconds")
     parser.add_argument('directory', type=str, help="Path to the directory with messages")
 
     args = parser.parse_args()
     delay_seconds = args.delay
+    scroll_delay_seconds = args.scroll_delay
     directory_path = args.directory
     
     delay_seconds = max(delay_seconds, .3)
@@ -60,6 +83,5 @@ if __name__ == '__main__':
             except FileNotFoundError:
                 print("{} file not found - skipping".format(f))
 
-            lcd_write(message)
-            sleep(delay_seconds)
+            lcd_write(message, delay_seconds, scroll_delay_seconds)
 
