@@ -20,7 +20,7 @@ class BookProgress:
     def __str__(self):
         page_today = self._calculate_progress()
         progress_fraction = page_today / self.book.total_pages
-        return "{}: {} {:.0%}".format(self.book.name, page_today, progress_fraction)
+        return "{}: p{} ({:.0%})".format(self.book.name, page_today, progress_fraction)
 
 
 stallings = Book(name='Stallings', total_pages=818)

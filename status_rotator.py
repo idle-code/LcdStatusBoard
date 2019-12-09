@@ -9,6 +9,9 @@ from RPi import GPIO
 LCD_COLS = 16
 
 def lcd_write(text, delay=3, scroll_delay=0.2):
+    if not text:
+        return
+
     lcd = CharLCD(
             pin_rs=15, pin_rw=16, pin_e=18,
             pins_data=[21, 22, 23, 24],
@@ -45,7 +48,7 @@ def lcd_write(text, delay=3, scroll_delay=0.2):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="LCD text rotation utility")
     parser.add_argument('-d', '--delay', type=float, default=3.0, help="Delay between different messages in seconds")
-    parser.add_argument('-s', '--scroll-delay', type=float, default=0.5, help="Animation delay of scrolling message in seconds seconds")
+    parser.add_argument('-s', '--scroll-delay', type=float, default=0.3, help="Animation delay of scrolling message in seconds seconds")
     parser.add_argument('directory', type=str, help="Path to the directory with messages")
 
     args = parser.parse_args()
