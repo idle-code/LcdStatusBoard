@@ -32,3 +32,12 @@ stallings_progress = BookProgress(
 
 print(stallings_progress)
 
+maththink = Book(name='Myslenie', total_pages=144)
+maththink_progress = BookProgress(
+        maththink,
+        start_date = date(2020, 1, 1),
+        start_page = 5,
+        pages_per_day = 2)
+
+print(maththink_progress)
+
