@@ -8,6 +8,9 @@ current_time = datetime.now()
 moon_times = suncalc.getMoonTimes(current_time, lat, lon)
 moon_phase = suncalc.getMoonIllumination(current_time)
 
-print("Moon rise: {}".format(moon_times['rise'].time().strftime("%H:%M")))
+if 'rise' in moon_times:
+    print("Moon rise: {}".format(moon_times['rise'].time().strftime("%H:%M")))
+else:
+    print("No moonrise today")
 print("Fraction: {:.0%}".format(moon_phase['fraction']))
 
