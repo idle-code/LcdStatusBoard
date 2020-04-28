@@ -22,15 +22,16 @@ class BookProgress:
     def __str__(self):
         page_today, days_left = self._calculate_progress()
         progress_fraction = page_today / self.book.total_pages
+        first_line = "{}: p{}".format(self.book.name, page_today)
         if days_left > 0:
-            #ends_message = "\nEnds in {} days ({})".format(days_left, self.end_date)
-            ends_message = "\nEnds in {} days".format(days_left)
+            #second_line = "\nEnds in {} days ({})".format(days_left, self.end_date)
+            second_line = "{:.0%} | {}d left".format(progress_fraction, days_left)
         elif days_left == 0:
-            ends_message = "\nEnds today"
+            second_line = "Ends today"
         else:
-            ends_message = "\nEnded {} days ago".format(-days_left)
+            second_line = "Ended {} days ago".format(-days_left)
 
-        return "{}: p{} ({:.0%})".format(self.book.name, page_today, progress_fraction) + ends_message
+        return first_line + "\n" + second_line
 
 
 stallings = Book(name='Stallings', total_pages=818)
