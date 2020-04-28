@@ -25,7 +25,7 @@ class BookProgress:
         first_line = "{}: p{}".format(self.book.name, page_today)
         if days_left > 0:
             #second_line = "\nEnds in {} days ({})".format(days_left, self.end_date)
-            second_line = "{:.0%} | {}d left".format(progress_fraction, days_left)
+            second_line = "{:.0%}   {}d left".format(progress_fraction, days_left)
         elif days_left == 0:
             second_line = "Ends today"
         else:
