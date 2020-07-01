@@ -34,12 +34,23 @@ class BookProgress:
         return first_line + "\n" + second_line
 
 
-stallings = Book(name='Stallings', total_pages=818)
-stallings_progress = BookProgress(
-        stallings,
-        start_date = date(2019, 10, 8),
-        start_page = 260,
+geek_cooking = Book(name='Gotowanie', total_pages=450)
+geek_cooking_progress = BookProgress(
+        geek_cooking,
+        start_date = date(2020, 7, 1),
+        start_page = 60,
         pages_per_day = 2)
 
-print(stallings_progress)
+print(geek_cooking_progress)
+
+
+#tcp_ip = Book(name='TCP/IP', total_pages=961)
+#tcp_ip_progress = BookProgress(
+#        tcp_ip,
+#        start_date = date(2020, 7, 1),
+#        start_page = 108,
+#        pages_per_day = 2)
+#
+#print(tcp_ip_progress)
+
 
