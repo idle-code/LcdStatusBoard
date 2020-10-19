@@ -1,0 +1,6 @@
+You are
+{%- if commit_difference < 0 %} {{ -commit_difference }} commits behind
+{%- elif commit_difference == 0 %} on time!
+{%- else %} {{ commit_difference }} commits AHEAD
+{%- endif %}
+{{ days_left }} days left
