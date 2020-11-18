@@ -1,19 +1,21 @@
-{%- if status == "pending" -%}
+{%- if challenge.state == "pending" -%}
 Challenge starts
 in {{ days_left }} days
-{%- elif status == "in_progress" -%}
-You are
-{%- if commit_difference < 0 %} {{ -commit_difference }} commits behind
-{%- elif commit_difference == 0 %} on track!
-{%- else %} {{ commit_difference }} commits AHEAD
-{%- endif %}
-{{ days_left }} days left
-{%- elif status == "succeeded" -%}
-You have WON the challenge!
-Challenge ended {{ days_left }} days ago
-{%- elif status == "failed" -%}
-You have FAILED the challenge!
-Challenge ended {{ days_left }} days ago
+{%- elif challenge.state == "in_progress" and stats.commit_difference < 0 -%}
+You are {{ -stats.commit_difference }}
+commits behind
+{%- elif challenge.state == "in_progress" and stats.commit_difference == 0 -%}
+You are on track
+keep coding!
+{%- elif challenge.state == "in_progress" and stats.commit_difference > 0 -%}
+You are {{ stats.commit_difference }}
+commits AHEAD!
+{%- elif stats.result == "succeeded" -%}
+You have WON
+the challenge!
+{%- elif stats.result == "failed" -%}
+You have FAILED
+the challenge!
 {%- else -%}
 Error: Unknown status
 {%- endif -%}
