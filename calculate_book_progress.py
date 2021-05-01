@@ -15,7 +15,7 @@ class BookProgress:
     def _calculate_progress(self):
         today_date = datetime.now().date()
         days_from_start = (today_date - self.start_date).days
-        expected_page_today = self.start_page + days_from_start * self.pages_per_day
+        expected_page_today = min(self.start_page + days_from_start * self.pages_per_day, self.book.total_pages)
         days_left = (self.end_date - today_date).days
         return expected_page_today, days_left
 
@@ -34,23 +34,19 @@ class BookProgress:
         return first_line + "\n" + second_line
 
 
-geek_cooking = Book(name='Gotowanie', total_pages=450)
-geek_cooking_progress = BookProgress(
-        geek_cooking,
-        start_date = date(2020, 7, 1),
-        start_page = 60,
-        pages_per_day = 2)
-
-print(geek_cooking_progress)
-
-
 #tcp_ip = Book(name='TCP/IP', total_pages=961)
 #tcp_ip_progress = BookProgress(
 #        tcp_ip,
-#        start_date = date(2020, 7, 1),
-#        start_page = 108,
-#        pages_per_day = 2)
-#
+#        start_date = date(2021, 5, 1),
+#        start_page = 200,
+#        pages_per_day = 1)
 #print(tcp_ip_progress)
 
+agile = Book(name='Agile', total_pages=534)
+agile_progress = BookProgress(
+        agile,
+        start_date = date(2021, 5, 1),
+        start_page = 13,
+        pages_per_day = 2)
+print(agile_progress)
 

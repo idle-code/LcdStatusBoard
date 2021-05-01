@@ -1,6 +1,6 @@
 {%- if challenge.state == "pending" -%}
 Challenge starts
-in {{ days_left }} days
+in {{ -challenge.days_from_start }} days
 {%- elif challenge.state == "in_progress" and stats.commit_difference < 0 -%}
 You are {{ -stats.commit_difference }}
 commits behind
