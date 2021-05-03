@@ -21,7 +21,7 @@ class BookProgress:
 
     def __str__(self):
         page_today, days_left = self._calculate_progress()
-        progress_fraction = page_today / self.book.total_pages
+        progress_fraction = (page_today - self.start_page) / self.book.total_pages
         first_line = "{}: p{}".format(self.book.name, page_today)
         if days_left > 0:
             #second_line = "\nEnds in {} days ({})".format(days_left, self.end_date)
