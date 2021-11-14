@@ -2,8 +2,8 @@
 from datetime import datetime, time, timedelta
 
 DISPLAY_WIDTH = 16
-START_DATE_STR = '2021-08-03'
-END_DATE_STR = '2021-10-01'
+START_DATE_STR = '2021-10-19'
+END_DATE_STR = '2021-11-19'
 
 class ProgressBar:
     def __init__(self, value=0):
@@ -26,7 +26,7 @@ class ProgressBar:
 
 current_time = datetime.now()
 
-start_date = datetime.strptime(START_DATE_STR, '%Y-%m-%d') 
+start_date = datetime.strptime(START_DATE_STR, '%Y-%m-%d')
 end_date = datetime.strptime(END_DATE_STR, '%Y-%m-%d')
 duration = end_date - start_date
 

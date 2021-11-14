@@ -34,19 +34,19 @@ class BookProgress:
         return first_line + "\n" + second_line
 
 
-#tcp_ip = Book(name='TCP/IP', total_pages=961)
-#tcp_ip_progress = BookProgress(
-#        tcp_ip,
-#        start_date = date(2021, 5, 1),
-#        start_page = 200,
-#        pages_per_day = 1)
-#print(tcp_ip_progress)
+tcp_ip = Book(name='TCP/IP', total_pages=961)
+tcp_ip_progress = BookProgress(
+        tcp_ip,
+        start_date = date(2021, 10, 19),
+        start_page = 200,
+        pages_per_day = 1)
+print(tcp_ip_progress)
 
-agile = Book(name='Agile', total_pages=534)
-agile_progress = BookProgress(
-        agile,
-        start_date = date(2021, 5, 1),
-        start_page = 13,
-        pages_per_day = 2)
-print(agile_progress)
+#agile = Book(name='Agile', total_pages=534)
+#agile_progress = BookProgress(
+#        agile,
+#        start_date = date(2021, 5, 1),
+#        start_page = 13,
+#        pages_per_day = 2)
+#print(agile_progress)
 
